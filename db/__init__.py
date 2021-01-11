@@ -27,8 +27,10 @@ class Mongo:
             self.__connection()
             self.__db[collection].insert_one(payload)
 
+            return None
+
         except Exception as ex:
-            print(f'[ERROR DB]: {ex}')
+            return {'message': ex, 'status': 'error'}
 
         finally:
             self.__client.close()
