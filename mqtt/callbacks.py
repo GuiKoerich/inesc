@@ -29,9 +29,11 @@ def on_connect(client, userdata, flags, rc):
 
 def on_message(client, userdata, message):
     payload = {'timestamp': str(datetime.now()), message.topic: message_decoded(message.payload)}
+    print(message.payload)
+    print(payload)
 
     error = db.insert(collection=collection_by_topic(message.topic), payload=payload)
-
+    # error = None
     if error:
         printer(message=f'[DB ERROR] Error on save in collection: {collection_by_topic(message.topic)} | '
                         f'payload: {payload} | cause: {error.get("message")}', status=error.get('status'))
@@ -68,7 +70,15 @@ def collection_by_topic(topic: str) -> str:
 
 
 def message_decoded(payload):
-    return str(payload.decode('utf-8'))
+    message = str(payload.decode('utf-8'))
+
+    if message.__eq__('false'):
+        return 0
+
+    elif message.__eq__('true'):
+        return 1
+
+    return message
 
 
 def printer(message, status):

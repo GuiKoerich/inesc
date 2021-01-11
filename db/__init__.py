@@ -34,33 +34,3 @@ class Mongo:
 
         finally:
             self.__client.close()
-
-    def get_all(self, collection):
-        try:
-            self.__connection()
-
-            for result in self.__db[collection].find():
-                print(result)
-
-        except Exception as ex:
-            print(ex)
-        finally:
-            self.__client.close()
-
-    def delete(self, collection):
-        try:
-            self.__connection()
-
-            for result in self.__db[collection].find():
-                self.__db[collection].delete_one(result)
-
-        except Exception as ex:
-            print(ex)
-        finally:
-            self.__client.close()
-
-
-if __name__ == '__main__':
-    m = Mongo()
-    m.get_all('Sala')
-    m.delete('Sala')

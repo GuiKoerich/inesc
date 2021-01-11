@@ -24,7 +24,7 @@ topics_collections = {
     'sala': 'Sala',
     'Imp3D': 'Imp3D',
     'Armaz': 'Armazenamento',
-    'Arm': 'Braco',
+    'Arm': 'Robo',
     'Alarmes': 'Alarmes',
     'Barr': 'Barreiras'
 }
