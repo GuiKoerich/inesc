@@ -5,8 +5,10 @@ from pymongo import MongoClient
 class Mongo:
     __slots__ = ['__client', '__db']
 
-    __host = 'inescfloripa.computacaosc.com.br'
-    __port = 443
+    # __host = 'inescfloripa.computacaosc.com.br'
+    __host = '192.168.0.20'
+    # __port = 443
+    __port = 27017
 
     __db_name = 'IND4Fibre_2'
 
