@@ -1,15 +1,10 @@
 from datetime import datetime
 from db import Mongo
 from .topics import topics, topics_collections
+from printer import printer
+
 
 __all__ = ['on_message', 'on_connect', 'on_disconnect']
-
-colors = {
-    'default': '\033[0m',
-    'success': '\033[92m',
-    'error': '\033[91m',
-    'info': '\033[95m'
-}
 
 db = Mongo()
 
@@ -98,7 +93,3 @@ def message_decoded(payload):
         return 1
 
     return message
-
-
-def printer(message, status):
-    print(f'{colors.get(status)}{message}{colors.get("default")}')

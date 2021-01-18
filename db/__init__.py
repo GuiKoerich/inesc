@@ -1,3 +1,4 @@
+from datetime import datetime, timedelta
 from pymongo import MongoClient
 
 
@@ -28,6 +29,29 @@ class Mongo:
             self.__db[collection].insert_one(payload)
 
             return None
+
+        except Exception as ex:
+            return {'message': ex, 'status': 'error'}
+
+        finally:
+            self.__client.close()
+
+    def select_all(self, interval=None):
+        try:
+            self.__connection()
+            result = {}
+
+            # end = datetime.now()
+            # start = end - timedelta(days=interval)
+            # options = {'timestamp': {'$gte': str(start), '$lt': str(end)}}
+
+            for data_collection in self.__db.list_collections():
+                collection = data_collection.get('name')
+                result.update({
+                    collection: [data for data in self.__db[collection].find()]
+                })
+
+            return result
 
         except Exception as ex:
             return {'message': ex, 'status': 'error'}
