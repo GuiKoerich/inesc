@@ -27,7 +27,7 @@ def export(csv, json, interval, file_path):
     check_dir(file_path)
 
     try:
-        ExportData(csv, json, interval, file_path).save()
+        ExportData(csv=csv, json=json, interval=None, file_path=file_path).save()
 
         printer(message='Dados exportados com sucesso!', status='success')
 

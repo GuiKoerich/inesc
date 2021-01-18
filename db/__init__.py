@@ -40,15 +40,17 @@ class Mongo:
         try:
             self.__connection()
             result = {}
+            options = None
 
-            # end = datetime.now()
-            # start = end - timedelta(days=interval)
-            # options = {'timestamp': {'$gte': str(start), '$lt': str(end)}}
+            if interval:
+                end = datetime.now()
+                start = end - timedelta(days=interval)
+                options = {'timestamp': {'$gte': str(start), '$lt': str(end)}}
 
             for data_collection in self.__db.list_collections():
                 collection = data_collection.get('name')
                 result.update({
-                    collection: [data for data in self.__db[collection].find()]
+                    collection: [data for data in self.__db[collection].find(options)]
                 })
 
             return result
