@@ -1,7 +1,5 @@
-from time import sleep
 from paho.mqtt.client import Client
 from .callbacks import *
-from printer import printer
 
 
 def define_callbacks(cli: Client) -> None:
@@ -20,15 +18,5 @@ def client() -> Client:
     return cli
 
 
-def serve():
-    try:
-        client().loop_forever()
-
-    except Exception as ex:
-        printer(message=f'[SCRIPT ERROR] {ex}', status='error')
-        sleep(5)
-        serve()
-
-
 def run():
-    serve()
+    client().loop_forever(retry_first_connection=True)
