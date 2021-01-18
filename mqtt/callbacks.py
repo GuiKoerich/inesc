@@ -61,7 +61,7 @@ def subscribe(cli):
 
 
 def collection_by_topic(topic: str) -> str:
-    key = split_topic(topic)
+    key = split_topic(topic)[0]
 
     return topics_collections.get(key)
 
