@@ -32,7 +32,7 @@ def export(csv, json, interval, file_path):
         printer(message='Dados exportados com sucesso!', status='success')
 
     except Exception as ex:
-        print(ex)
+        printer(message=f'[EXPORT ERROR]: {ex}', status='error')
 
 
 if __name__ == '__main__':
