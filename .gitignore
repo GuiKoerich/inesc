@@ -243,4 +243,7 @@ dmypy.json
 pyvenv.cfg
 pip-selfcheck.json
 
+# Visual Studio Code
+.vscode
+
 # End of https://www.toptal.com/developers/gitignore/api/pycharm+all,virtualenv,python
