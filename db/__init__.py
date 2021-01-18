@@ -43,9 +43,8 @@ class Mongo:
             options = None
 
             if interval:
-                end = datetime.now()
-                start = end - timedelta(days=interval)
-                options = {'timestamp': {'$gte': str(start), '$lt': str(end)}}
+                start = datetime.now() - timedelta(minutes=interval)
+                options = {'timestamp': {'$gt': str(start)}}
 
             for data_collection in self.__db.list_collections():
                 collection = data_collection.get('name')
