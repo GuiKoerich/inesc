@@ -13,6 +13,8 @@ colors = {
 
 db = Mongo()
 
+error_topic = 'erro'
+
 
 def on_connect(client, userdata, flags, rc):
     if rc.__eq__(0):
@@ -28,12 +30,12 @@ def on_connect(client, userdata, flags, rc):
 
 
 def on_message(client, userdata, message):
-    payload = {'timestamp': str(datetime.now()), message.topic: message_decoded(message.payload)}
-    print(message.payload)
-    print(payload)
+    payload = {'timestamp': str(datetime.now()), define_topic(message.topic): message_decoded(message.payload)}
+    # print(message.payload)
+    # print(payload)
 
     error = db.insert(collection=collection_by_topic(message.topic), payload=payload)
-    # error = None
+
     if error:
         printer(message=f'[DB ERROR] Error on save in collection: {collection_by_topic(message.topic)} | '
                         f'payload: {payload} | cause: {error.get("message")}', status=error.get('status'))
@@ -64,9 +66,26 @@ def subscribe(cli):
 
 
 def collection_by_topic(topic: str) -> str:
-    key = topic.replace('topic_', '').split('/')[0]
+    key = split_topic(topic)
 
     return topics_collections.get(key)
+
+
+def split_topic(topic: str) -> list:
+    return topic.replace('topic_', '').split('/')
+
+
+def define_topic(topic: str) -> str:
+    split = split_topic(topic)
+
+    return compose_topic(topic_splited=split, is_error=split.__contains__(error_topic))
+
+
+def compose_topic(topic_splited: list, is_error: bool) -> str:
+    if not is_error:
+        return f"{topic_splited[-1]}"
+
+    return "_".join(topic_splited[topic_splited.index(error_topic) + 1:])
 
 
 def message_decoded(payload):
