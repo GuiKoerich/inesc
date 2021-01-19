@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import date
 from xlsxwriter import Workbook
 
 
@@ -10,7 +10,7 @@ class ExportCSV:
     __default_keys = ['_id', 'timestamp']
 
     def __init__(self):
-        self.__filename = f'inesc_export_{datetime.now()}.csv'
+        self.__filename = f'inesc_export_{date.now()}.csv'
 
         self.__clear_cols_and_rows()
 

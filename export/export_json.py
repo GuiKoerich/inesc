@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import date
 from json import dumps
 
 
@@ -8,7 +8,7 @@ class ExportJSON:
     __default_keys = ['_id', 'timestamp']
 
     def __init__(self):
-        self.__filename = f'inesc_export_{datetime.now()}.json'
+        self.__filename = f'inesc_export_{date.now()}.json'
 
     def __prepare(self, data, file_path):
         self.__full_path = f'{file_path}/{self.__filename}'
