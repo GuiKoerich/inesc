@@ -10,7 +10,7 @@ class ExportCSV:
     __default_keys = ['_id', 'timestamp']
 
     def __init__(self):
-        self.__filename = f'inesc_export_{date.today()}.csv'
+        self.__filename = f'inesc_floripa_export_{date.today()}.csv'
 
         self.__clear_cols_and_rows()
 
