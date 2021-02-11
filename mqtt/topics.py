@@ -34,4 +34,5 @@ topics_collections = {
 topic_by_values = {
     'topic_Arm/sensor/': ['posX', 'posY', 'posZ', 'joint1', 'joint2', 'joint3', 'joint4', 'joint5', 'joint6', 'joint7',
                           'vel1', 'vel2', 'vel3', 'vel4', 'vel5', 'vel6', 'vel7'],
+    'topic_Alarmes/erro/Robo': ['alarmHigh'],
 }

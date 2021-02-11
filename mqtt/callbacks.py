@@ -4,7 +4,7 @@ from .topics import topics, topics_collections, topic_by_values
 from printer import printer
 
 
-__all__ = ['on_message', 'on_connect', 'on_disconnect']
+__all__ = ['on_message', 'on_connect', 'on_disconnect', 'get_topic_by_value', 'insert', 'define_topic']
 
 db = Mongo()
 
@@ -99,7 +99,11 @@ def insert(topic, payload):
                         f'payload: {payload} | cause: {error.get("message")}', status=error.get('status'))
 
 
-def get_topic_by_value(value):
+def get_topic_by_value(value, concat=True):
     for key in topic_by_values.keys():
         if topic_by_values.get(key).__contains__(value):
-            return f'{key}{value}'
+            if concat:
+                return f'{key}{value}'
+
+            else:
+                return key
