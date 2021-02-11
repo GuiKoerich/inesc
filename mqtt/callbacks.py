@@ -1,6 +1,6 @@
 from datetime import datetime
 from db import Mongo
-from .topics import topics, topics_collections
+from .topics import topics, topics_collections, topic_by_values
 from printer import printer
 
 
@@ -29,11 +29,7 @@ def on_message(client, userdata, message):
     # print(message.payload)
     # print(payload)
 
-    error = db.insert(collection=collection_by_topic(message.topic), payload=payload)
-
-    if error:
-        printer(message=f'[DB ERROR] Error on save in collection: {collection_by_topic(message.topic)} | '
-                        f'payload: {payload} | cause: {error.get("message")}', status=error.get('status'))
+    insert(topic=message.topic, payload=payload)
 
 
 def on_disconnect(client, userdata, rc):
@@ -93,3 +89,17 @@ def message_decoded(payload):
         return 1
 
     return message
+
+
+def insert(topic, payload):
+    error = db.insert(collection=collection_by_topic(topic), payload=payload)
+
+    if error:
+        printer(message=f'[DB ERROR] Error on save in collection: {collection_by_topic(topic)} | '
+                        f'payload: {payload} | cause: {error.get("message")}', status=error.get('status'))
+
+
+def get_topic_by_value(value):
+    for key in topic_by_values.keys():
+        if topic_by_values.get(key).__contains__(value):
+            return f'{key}{value}'

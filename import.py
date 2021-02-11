@@ -15,7 +15,7 @@ def check_file_path(path: str):
 def import_file(file_path):
     if not file_path:
         printer(message=f'É preciso informar o caminho do arquivo para importar!\n'
-                        f'Exemplo: import --path=/home/usuario/file.csv', status='info')
+                        f'Exemplo: python3 import.py --path=/home/usuario/file.csv', status='info')
         return
 
     try:
@@ -27,6 +27,7 @@ def import_file(file_path):
 
     except Exception as ex:
         printer(message=f'[IMPORT ERROR]: {ex}', status='error')
+        raise ex
 
 
 if __name__ == '__main__':
