@@ -7,7 +7,9 @@ topics = [
     'topic_Imp3D/sensor/temperatura', 'topic_Imp3D/sensor/umidade', 'topic_Imp3D/sensor/iluminacao',
     'topic_Arm/sensor/posX', 'topic_Arm/sensor/posY', 'topic_Arm/sensor/posZ', 'topic_Arm/sensor/joint1',
     'topic_Arm/sensor/joint2', 'topic_Arm/sensor/joint3', 'topic_Arm/sensor/joint4',
-    'topic_Arm/sensor/joint5', 'topic_Arm/sensor/joint6', 'topic_Arm/sensor/velocidade',
+    'topic_Arm/sensor/joint5', 'topic_Arm/sensor/joint6', 'topic_Arm/sensor/joint7', 'topic_Arm/sensor/vel1',
+    'topic_Arm/sensor/vel2', 'topic_Arm/sensor/vel3', 'topic_Arm/sensor/vel4', 'topic_Arm/sensor/vel5',
+    'topic_Arm/sensor/vel6', 'topic_Arm/sensor/vel7',
     'topic_Arm/sensor/garra', 'topic_Arm/sensor/comando', 'topic_Armaz/sensor/iluminacao',
     'topic_Barr/sensor/Barreira1', 'topic_Barr/sensor/Barreira2', 'topic_Barr/sensor/Barreira3',
     'topic_Barr/sensor/Barreira4', 'topic_sala/config/frequencia', 'topic_sala/config/habilitar',
@@ -26,5 +28,11 @@ topics_collections = {
     'Armaz': 'Armazenamento',
     'Arm': 'Robo',
     'Alarmes': 'Alarmes',
-    'Barr': 'Barreiras'
+    'Barr': 'Barreiras',
+}
+
+topic_by_values = {
+    'topic_Arm/sensor/': ['posX', 'posY', 'posZ', 'joint1', 'joint2', 'joint3', 'joint4', 'joint5', 'joint6', 'joint7',
+                          'vel1', 'vel2', 'vel3', 'vel4', 'vel5', 'vel6', 'vel7'],
+    'topic_Alarmes/erro/Robo': ['alarmHigh'],
 }
