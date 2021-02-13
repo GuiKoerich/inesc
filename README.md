@@ -6,3 +6,6 @@
 ### After virtualenv installed
 
 run `make install` to configure virtualenv and install libs for this project
+
+### Reload SystemCTL
+sudo systemctl restart systemd-python
