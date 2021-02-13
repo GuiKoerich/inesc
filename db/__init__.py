@@ -3,7 +3,7 @@ from pymongo import MongoClient
 
 
 class Mongo:
-    __slots__ = ['__client', '__db']
+    __slots__ = ['__client', '__db', '__bulk']
 
     # __host = 'inescfloripa.computacaosc.com.br'
     __host = '192.168.0.20'
@@ -31,6 +31,23 @@ class Mongo:
             self.__db[collection].insert_one(payload)
 
             return None
+
+        except Exception as ex:
+            return {'message': ex, 'status': 'error'}
+
+        finally:
+            self.__client.close()
+
+    def bulk_insert(self, collection, payloads):
+        try:
+            self.__connection()
+            bulk = self.__db[collection].initialize_ordered_bulk_op()
+
+            for payload in payloads:
+                payload.pop('topic')
+                bulk.insert(payload)
+
+            bulk.execute()
 
         except Exception as ex:
             return {'message': ex, 'status': 'error'}

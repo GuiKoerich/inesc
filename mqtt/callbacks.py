@@ -4,7 +4,8 @@ from .topics import topics, topics_collections, topic_by_values
 from printer import printer
 
 
-__all__ = ['on_message', 'on_connect', 'on_disconnect', 'get_topic_by_value', 'insert', 'define_topic']
+__all__ = ['on_message', 'on_connect', 'on_disconnect', 'get_topic_by_value', 'insert', 'define_topic',
+           'collection_by_topic']
 
 db = Mongo()
 
