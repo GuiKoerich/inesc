@@ -1,4 +1,8 @@
-venv:
-	virtualenv venv && source $(shell pwd)/venv/bin/activate && pip install -r requirements.txt && deactivate;
+--clone:
+		git pull origin master
 
-install: venv
+--restart-systemd:
+		sudo systemctl restart systemd-python
+
+
+install: --clone --restart-systemd

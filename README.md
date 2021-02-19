@@ -1,11 +1,8 @@
 # INESC API Python Project
 
-### Before install this project
-`pip3 install virtualenv`
+### Install this project
+`pip3 install -r requirements.txt`
 
-### After virtualenv installed
+### After project installed
 
-run `make install` to configure virtualenv and install libs for this project
-
-### Reload SystemCTL
-sudo systemctl restart systemd-python
+run `make install` to configure install libs for this project and reload Systemd process
