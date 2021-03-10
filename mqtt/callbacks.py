@@ -11,6 +11,9 @@ db = Mongo()
 
 error_topic = 'erro'
 
+rc_errors = {1: 'incorrect protocol version', 2: 'invalid client identifier', 3: 'server unavailable',
+             4: 'incorrect username or password', 5: 'not authorized'}
+
 
 def on_connect(client, userdata, flags, rc):
     if rc.__eq__(0):
@@ -30,14 +33,16 @@ def on_message(client, userdata, message):
     # print(message.payload)
     # print(payload)
 
-    insert(topic=message.topic, payload=payload)
+    # insert(topic=message.topic, payload=payload)
 
 
 def on_disconnect(client, userdata, rc):
     if not rc.__eq__(0):
-        printer(message=f'[MQTT] Unexpected disconnection from broker!', status='error')
+        printer(message=f'[MQTT] Disconnection from broker! Reason: {rc_errors.get(rc, "unexpected")}', status='error')
+
+        unsubscribe(client)
+
         printer(message=f'[MQTT] Trying reconnect...', status='info')
-        client.reconnect()
 
 
 def subscribe(cli):
@@ -55,6 +60,20 @@ def subscribe(cli):
             status = 'error'
 
         printer(message, status)
+
+
+def unsubscribe(cli):
+    result, qos = cli.unsubscribe(topics)
+
+    if result.__eq__(0):
+        message = f' >>> [UNSUBSCRIBED] unsubscribed topics with success!'
+        status = 'success'
+
+    else:
+        message = f" >>> [UNSUBSCRIBED] couldn't unsubscribed topics!"
+        status = 'error'
+
+    printer(message, status)
 
 
 def collection_by_topic(topic: str) -> str:
