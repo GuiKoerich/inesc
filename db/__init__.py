@@ -6,7 +6,7 @@ class Mongo:
     __slots__ = ['__client', '__db', '__bulk']
 
     # __host = 'inescfloripa.computacaosc.com.br'
-    __host = '192.168.0.20'
+    __host = '127.0.0.1'
     # __port = 443
     __port = 27017
 

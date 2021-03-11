@@ -3,7 +3,7 @@ from .callbacks import *
 
 
 # host = 'inescfloripa.computacaosc.com.br'
-host = '192.168.0.20'
+host = '127.0.0.1'
 
 
 def define_callbacks(cli: Client) -> None:
