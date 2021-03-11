@@ -33,7 +33,7 @@ def on_message(client, userdata, message):
     # print(message.payload)
     # print(payload)
 
-    # insert(topic=message.topic, payload=payload)
+    insert(topic=message.topic, payload=payload)
 
 
 def on_disconnect(client, userdata, rc):
