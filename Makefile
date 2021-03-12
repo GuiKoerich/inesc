@@ -1,5 +1,5 @@
 --clone:
-		git pull origin master
+		git checkout -- . && git checkout master && git pull origin master
 
 --install-requirements:
 		pip3 install -r requirements.txt
@@ -14,5 +14,8 @@
 --systemd-reload:
 		sudo systemctl daemon-reload
 
+--systemd: --system-d --systemd-reload --restart-systemd
 
 install: --install-requirements --system-d --systemd-reload --restart-systemd
+
+update: --clone --install-requirements --systemd
