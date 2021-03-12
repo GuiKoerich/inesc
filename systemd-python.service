@@ -1,0 +1,9 @@
+[Unit]
+Description=Python API for INESC
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/python3 /home/inescfloripa/inesc/main.py
+
+[Install]
+WantedBy=multi-user.target

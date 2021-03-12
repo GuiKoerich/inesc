@@ -1,5 +1,5 @@
 from os.path import isfile
-from click import command, option, Path, argument
+from click import command, Path, argument
 from printer import printer
 
 from import_file import ImportData

@@ -12,6 +12,10 @@ class Mongo:
 
     __db_name = 'IND4Fibre_2'
 
+    __TIME_FORMAT = '%Y-%m-%d-%H:%M:%S'
+    __initial_date = 0
+    __end_date = 1
+
     def __connection(self):
         self.__connect()
         self.__get_db()
@@ -55,7 +59,7 @@ class Mongo:
         finally:
             self.__client.close()
 
-    def select_all(self, interval=None):
+    def select_all(self, collection=None, interval=None, between=None):
         try:
             self.__connection()
             result = {}
@@ -65,11 +69,17 @@ class Mongo:
                 start = datetime.now() - timedelta(minutes=interval)
                 options = {'timestamp': {'$gt': str(start)}}
 
-            for data_collection in self.__db.list_collections():
-                collection = data_collection.get('name')
-                result.update({
-                    collection: [data for data in self.__db[collection].find(options)]
-                })
+            if between:
+                start, end = self.__get_between_dates(between)
+                options = {'timestamp': {'$gte': str(start), '$lt': str(end)}}
+
+            if not collection:
+                for data_collection in self.__db.list_collections():
+                    collection = data_collection.get('name')
+                    result.update(self.__get_data_by_collection(collection, options))
+
+            else:
+                return self.__get_data_by_collection(collection, options)
 
             return result
 
@@ -78,3 +88,16 @@ class Mongo:
 
         finally:
             self.__client.close()
+
+    def __get_data_by_collection(self, collection: str, options: dict) -> dict:
+        return {
+            collection: [data for data in self.__db[collection].find(options)]
+        }
+
+    def __get_between_dates(self, between: str) -> (datetime, datetime):
+        dates = between.split(' ')
+
+        return self.__get_date_by_format(dates[self.__initial_date]), self.__get_date_by_format(dates[self.__end_date])
+
+    def __get_date_by_format(self, date_string: str) -> datetime:
+        return datetime.strptime(date_string, self.__TIME_FORMAT)
