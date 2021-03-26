@@ -14,7 +14,7 @@ topics = [
     'topic_Arm/sensor/posX', 'topic_Arm/sensor/posY', 'topic_Arm/sensor/posZ', 'topic_Arm/sensor/joint1',
     'topic_Arm/sensor/joint2', 'topic_Arm/sensor/joint3', 'topic_Arm/sensor/joint4',
     'topic_Arm/sensor/joint5', 'topic_Arm/sensor/joint6', 'topic_Arm/sensor/joint7',
-    'topic_Arm/sensor/velocidade',
+    'topic_Arm/sensor/velocidade', 'topic_Arm/sensor/joints',
     'topic_Arm/sensor/vel1', 'topic_Arm/sensor/vel2', 'topic_Arm/sensor/vel3', 'topic_Arm/sensor/vel4',
     'topic_Arm/sensor/vel5', 'topic_Arm/sensor/vel6', 'topic_Arm/sensor/vel7',
     'topic_Arm/sensor/garra', 'topic_Arm/sensor/comando',
